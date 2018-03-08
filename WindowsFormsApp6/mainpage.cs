@@ -986,10 +986,119 @@ namespace WindowsFormsApp6
                     TimeSpan time = TimeSpan.FromSeconds(count2 * interval);
 
                     TimeList2.Add(time);
-
-
-
                     DataRow dr2 = dt2.NewRow();
+
+                    dr2[0] = time;
+                    dr2[1] = heartrate;
+                    if (SpeedOn == true)
+                    {
+                        speed2 = splitter[columnindex].ToString();
+                        double SpeedKPH2 = Convert.ToInt32(speed2) / 10;
+                        double SpeedMPH2 = SpeedKPH2 / 1.609;
+                        if (kmph.Checked == true)
+                        {
+                            SpeedListCompare.Add(Convert.ToInt32(SpeedKPH2));
+                            list2Compare.Add(Convert.ToDouble(count), Convert.ToInt32(SpeedKPH2));
+                            label34.Text = "KM/H";
+                            label35.Text = "Kilometers";
+                            dr2[2] = SpeedKPH2;
+                        }
+                        else if (mph.Checked == true)
+                        {
+                            SpeedListCompare.Add(Convert.ToInt32(SpeedMPH2));
+                            list2Compare.Add(Convert.ToDouble(count2), SpeedMPH2);
+                            label34.Text = "MP/H";
+                            label35.Text = "Miles";
+                            dr2[2] = SpeedMPH2;
+                        }
+
+                        columnindex++;
+                    }
+                    if (CadenceOn == true)
+                    {
+                        cadence2 = splitter[columnindex].ToString();
+                        CadenceListCompare.Add(Convert.ToInt32(splitter[columnindex]));
+                        list4Compare.Add(Convert.ToDouble(count2), Convert.ToDouble(cadence2));
+                        columnindex++;
+                        dr2[3] = cadence2;
+
+                    }
+                    if (AltitudeOn == true)
+                    {
+                        altitude2 = splitter[columnindex].ToString();
+
+                        if (bool1 == true)
+                        {
+                            altitudeListCompare.Add(Convert.ToInt32(splitter[columnindex]));
+                            list3Compare.Add(Convert.ToDouble(count2), Convert.ToDouble(altitude));
+                            columnindex++;
+                            dr2[4] = altitude2;
+
+                        }
+                        if (PowerOn == true)
+                        {
+                            power2 = splitter[columnindex].ToString();
+
+
+                            PowerlistCompare.Add(Convert.ToInt32(splitter[columnindex]));
+                            list5Compare.Add(Convert.ToDouble(count2), Convert.ToDouble(power2));
+
+                            columnindex++;
+                            dr2[5] = power2;
+                        }
+                        if (Power2On == true)
+                        {
+                            string powerbalance2 = splitter[columnindex].ToString();
+                            int powerb2 = Convert.ToInt32(powerbalance2);
+                            byte[] bytearray = BitConverter.GetBytes(powerb2);
+                            pbl2 = bytearray[0];
+                            pbr2 = 100 - bytearray[0];
+                            pbi2 = bytearray[1];
+
+                            list6Compare.Add(Convert.ToInt32(pbl2));
+                            list7Compare.Add(Convert.ToInt32(pbr2));
+                            list8Compare.Add(Convert.ToInt32(pbi2));
+
+                            avgpbl = list6Compare.Average();
+                            avgpbr = list7Compare.Average();
+                            avgpbi = list8Compare.Average();
+
+
+                            dr2[6] = pbl2 + "/" + pbr2;
+                            columnindex++;
+                        }
+                        if (power3on == true)
+                        {
+                            dr2[7] = pbi2;
+                            columnindex++;
+                        }
+                        if (ccdata == true)
+                        {
+                            columnindex++;
+                        }
+                        if (USEUROon == true)
+                        {
+                            mph.Checked = true;
+                            columnindex++;
+                        }
+
+                        if (versionval == 107)
+                        {
+                            if (AIRPOn == true)
+                            {
+
+                            }
+                        }
+                        CadenceAverage2 = CadenceListCompare.Average();
+                        avgpower2 = PowerlistCompare.Average();
+                        maxpower2 = PowerlistCompare.Max();
+                        maxspeed2 = (SpeedListCompare.Max());
+                        speedavg2 = (SpeedListCompare.Average());
+                        altmax2 = altitudeListCompare.Max();
+                        AltitAVG2 = altitudeListCompare.Average();
+
+
+                        DataRow dr2 = dt2.NewRow();
 
                     dr2[0] = time;
                     dr2[1] = heartrate;
