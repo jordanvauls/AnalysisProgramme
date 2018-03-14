@@ -2205,56 +2205,56 @@ namespace WindowsFormsApp6
         /// </summary>
             public void getNP()
             {
-            int value = Powerlist.Count();
-            // movAvgCount = value;
-            //  MessageBox.Show(value.ToString());
+              int value = Powerlist.Count();
+                // movAvgCount = value;
+                //  MessageBox.Show(value.ToString());
 
-            for (int x = 0; x < value; x++)
-            {
-                double movingAverage30 = 0;
-                for (int j = 0; j < 30; j++)
+                for (int x = 0; x < value; x++)
                 {
-                    int index = x + j;
-                    index %= value;
-                    movingAverage30 += Convert.ToDouble(Powerlist[index]);
+                    double movingAverage30 = 0;
+                    for (int j = 0; j < 30; j++)
+                    {
+                        int index = x + j;
+                        index %= value;
+                        movingAverage30 += Convert.ToDouble(Powerlist[index]);
+                    }
+
+                    movingAverage30 /= 30;
+
+                    double movAvgPow = Math.Pow(movingAverage30, 4);
+                    movAvgPow4.Add(movAvgPow);
+                    movAvg.Add(movingAverage30);
+
                 }
+                movAvgCount = movAvgPow4.Count();
+                if (movAvgPow4 != null)
+                {
+                    double movAvgPow4Sum = movAvgPow4.Sum();
+                    double power = movAvgPow4Sum / movAvgCount;
+                    double normalizationPower = Math.Round(Math.Pow(power, 1.0 / 4), 2);
+                    double movingAverageSum = movAvg.Sum();
+                    double movingAverageValue = movingAverageSum / movAvgCount; // moving average value 
+                    labelnp.Visible = true;                                         // movingAverageGlobal = movingAverageValue;  
+                    labelnp.Text = normalizationPower.ToString();
+                    // ftp value 
+                    double ftpData = Convert.ToDouble(ftpbox.Text);
 
-                movingAverage30 /= 30;
+                    double ifGlobal = normalizationPower / ftpData;
+                    labelif.Visible = true;
+                    labelif.Text = ifGlobal.ToString();
 
-                double movAvgPow = Math.Pow(movingAverage30, 4);
-                movAvgPow4.Add(movAvgPow);
-                movAvg.Add(movingAverage30);
-
-            }
-            movAvgCount = movAvgPow4.Count();
-            if (movAvgPow4 != null)
-            {
-                double movAvgPow4Sum = movAvgPow4.Sum();
-                double power = movAvgPow4Sum / movAvgCount;
-                double normalizationPower = Math.Round(Math.Pow(power, 1.0 / 4), 2);
-                double movingAverageSum = movAvg.Sum();
-                double movingAverageValue = movingAverageSum / movAvgCount; // moving average value 
-                labelnp.Visible = true;                                         // movingAverageGlobal = movingAverageValue;  
-                labelnp.Text = normalizationPower.ToString();
-                // ftp value 
-                double ftpData = Convert.ToDouble(ftpbox.Text);
-
-                double ifGlobal = normalizationPower / ftpData;
-                labelif.Visible = true;
-                labelif.Text = ifGlobal.ToString();
-
-                // for tss 
+                    // for tss 
 
 
 
-                double tssGlobalOne = normalizationPower * ifGlobal * FullLengthInSecs; // sec value left  
-                double tssGlobalTwo = ftpData * 3600;
-                double tssGlobalThree = tssGlobalOne / tssGlobalTwo;
-                double tssGlobalFour = tssGlobalThree * 100;
-                double tssGlobal = tssGlobalFour;
-                labeltss.Visible = true;
-                labeltss.Text = tssGlobal.ToString();
-                int value = Powerlist.Count();
+                    double tssGlobalOne = normalizationPower * ifGlobal * FullLengthInSecs; // sec value left  
+                    double tssGlobalTwo = ftpData * 3600;
+                    double tssGlobalThree = tssGlobalOne / tssGlobalTwo;
+                    double tssGlobalFour = tssGlobalThree * 100;
+                    double tssGlobal = tssGlobalFour;
+                    labeltss.Visible = true;
+                    labeltss.Text = tssGlobal.ToString();
+               int value = Powerlist.Count();
                 // movAvgCount = value;
                 //  MessageBox.Show(value.ToString());
 
