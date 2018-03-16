@@ -284,7 +284,51 @@ namespace WindowsFormsApp6
             int low = 0;
             switch (intcounter)
             {
-              
+                case 1:
+                    low = intervals[0];
+                    high = intervals[1];
+                    break;
+                case 2:
+                    low = intervals[2];
+                    high = intervals[3];
+
+                    break;
+                case 3:
+                    low = intervals[4];
+                    high = intervals[5];
+                    break;
+                case 4:
+                    low = intervals[6];
+                    high = intervals[7];
+                    break;
+                case 5:
+                    low = intervals[8];
+                    high = intervals[9];
+                    break;
+
+                case 6:
+                    low = intervals[10];
+                    high = intervals[11];
+                    break;
+                case 7:
+                    low = intervals[12];
+                    high = intervals[13];
+                    break;
+                case 8:
+                    low = intervals[14];
+                    high = intervals[15];
+                    break;
+                case 9:
+                    low = intervals[16];
+                    high = intervals[17];
+                    break;
+                case 10:
+                    low = intervals[18];
+                    high = intervals[19];
+
+                    break;
+                default:
+                    break;
             }
             zedGraphControl1.GraphPane.XAxis.Scale.Min = Convert.ToDouble(low);
             zedGraphControl1.GraphPane.XAxis.Scale.Max = Convert.ToDouble(high);
