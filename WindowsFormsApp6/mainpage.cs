@@ -2226,7 +2226,8 @@ namespace WindowsFormsApp6
                     movAvg.Add(movingAverage30);
 
                 }
-                movAvgCount = movAvgPow4.Count();
+            movAvgCount = movAvgPow4.Count();
+            movAvgCount = movAvgPow4.Count();
                 if (movAvgPow4 != null)
                 {
                     double movAvgPow4Sum = movAvgPow4.Sum();
