@@ -2121,8 +2121,57 @@ namespace WindowsFormsApp6
                     label28.Text = Convert.ToString(Math.Round(altmax));
                 }
 
+                try
+                {
+                    if (HeartRateListCompare.Count > 0)
+                    {
 
-               if (HeartRateList.Count > 0) { 
+                        maxhr2 = HeartRateListCompare.Max();
+                        minhr2 = HeartRateListCompare.Min();
+                        avghr2 = HeartRateListCompare.Average();
+
+                        AltitAVG2 = altitudeListCompare.Average();
+                        altmax2 = altitudeListCompare.Max();
+
+                        maxpower2 = PowerlistCompare.Max();
+                        avgpower2 = PowerlistCompare.Average();
+
+                        CadenceAverage2 = CadenceListCompare.Average();
+                        decimal Cadencemax2 = CadenceListCompare.Max();
+
+
+                        label78.Text = Convert.ToString(Math.Round(CadenceAverage2));
+                        label76.Text = Convert.ToString(Math.Round(Cadencemax2));
+                        label89.Text = minhr2.ToString();
+                        label90.Text = maxhr2.ToString();
+                        label91.Text = avghr2.ToString();
+                        label80.Text = Convert.ToString(Math.Round(altmax2));
+                        label82.Text = Convert.ToString(Math.Round(AltitAVG2));
+                        label85.Text = Convert.ToString(Math.Round(maxpower2));
+                        label87.Text = Convert.ToString(Math.Round(avgpower2));
+                        PBLeft.Text = Convert.ToString(Math.Round(Convert.ToDecimal(avgpbl2)));
+                        PBRight.Text = Convert.ToString(Math.Round(Convert.ToDecimal(avgpbr2)));
+                        PILabel.Text = Convert.ToString(Math.Round(Convert.ToDecimal(avgpbi2)));
+                        Decimal HRaverage3 = Math.Round(Convert.ToDecimal(avghr));
+                        Decimal speedavg3 = Math.Round(Convert.ToDecimal(speedavg));
+                        Decimal AltitAVG3 = Math.Round(Convert.ToDecimal(AltitAVG));
+                        double hours2 = lengthinhours.TotalHours;
+                        minutes = lengthinhours.TotalMinutes;
+                        FullLengthInSecs = lengthinhours.TotalSeconds;
+                        totalDistance = Convert.ToDecimal(speedavg) * Convert.ToDecimal(hours2);
+                        label31.Text = Convert.ToString(Math.Round(totalDistance));
+                        label18.Text = Convert.ToString(HRaverage3);
+                        label19.Text = Convert.ToString(AltitAVG3);
+                        label20.Text = Convert.ToString(speedavg3);
+                        label21.Text = Convert.ToString(Math.Round(maxhr));
+                        label22.Text = Convert.ToString(Math.Round(minhr));
+                        label23.Text = Convert.ToString(Math.Round(maxspeed));
+                        label25.Text = Convert.ToString(Math.Round(avgpower));
+                        label26.Text = Convert.ToString(Math.Round(maxpower));
+                        label28.Text = Convert.ToString(Math.Round(altmax));
+                    }
+
+                    if (HeartRateList.Count > 0) { 
                     //getting max heart rate.
                     maxhr = HeartRateList.Max();
                   
