@@ -13,13 +13,22 @@ namespace WindowsFormsApp6.Tests
         [TestMethod()]
         public void testmethod1()
         {
+            ///param for version
             string param1 = "Version=1.06";
+
+            //stringing the version
             string version1;
 
+
+            //checking if the version contains the string
             if (param1.Contains("Version"))
             {
+
+                //spliting the string
                 string version = param1.ToString().Split('=')[1];
                 version1 = version;
+
+                //checking if it equals what is expected.
                 if (version1.Contains("1.06"))
                 {
                     istrue = true;
@@ -37,8 +46,10 @@ namespace WindowsFormsApp6.Tests
        
         public void CheckingFileFalse()
         {
-
+            ///checking the global path.
             string pathglob = form.pathglob;
+
+            //if it is not null.
             if (pathglob != null)
             {
                 istrue = true;
@@ -46,6 +57,8 @@ namespace WindowsFormsApp6.Tests
             }
             else
             {
+
+                ///if it is null
                 istrue = false;
             }
 
