@@ -345,7 +345,26 @@ namespace WindowsFormsApp6
         /// <param name="e"></param>
         public void Form1_Load(object sender, EventArgs e)
         {
-
+            userName = Environment.UserName;
+            //navigae to the director and create folder for values to be passed through if you dont already have it.
+            Directory.CreateDirectory(@"C:\Users\" + userName + "\\AnalysisData\\Fav\\");
+            //gets the directory info.
+            DirectoryInfo dinfo = new DirectoryInfo(@"C:\Users\" + userName + "\\AnalysisData\\Fav\\");
+            //creates the text file.
+            FileInfo[] Files = dinfo.GetFiles("*.HRM");
+            foreach (FileInfo file in Files)
+            {
+                string name = file.Name.Substring(0, file.Name.LastIndexOf(".HRM", StringComparison.OrdinalIgnoreCase));
+                if (name.Equals(""))
+                {
+                    File.Delete(@"C:\Users\" + userName + "\\AnalysisData\\Fav\\.HRM");
+                }
+                else
+                {
+                    //adds the name into the combo box.
+                    favouritesComboBox.Items.Add(name);
+                }
+            }
         }
         /// <summary>
         /// this is where the graph is loaded and the series are plotting.
