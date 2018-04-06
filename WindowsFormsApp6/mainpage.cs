@@ -2379,17 +2379,8 @@ namespace WindowsFormsApp6
 
 
                 return false;
-            yaxismax = sender.GraphPane.XAxis.Scale.Max;
-            xaxismax = sender.GraphPane.YAxis.Scale.Max;
 
-            yaxismin = sender.GraphPane.YAxis.Scale.Min;
-            yaxismin = sender.GraphPane.XAxis.Scale.Min;
-
-            zoomin = true;
-
-
-            return false;
-        }
+            }
         /// <summary>
         /// this is how the averages are recreated the params old state and new state are used.
         /// </summary>
