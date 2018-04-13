@@ -2547,9 +2547,101 @@ namespace WindowsFormsApp6
         /// <param name="iPt"></param>
         /// <returns></returns>
         private string ZedGraphControl1_PointValueEvent(ZedGraphControl sender, GraphPane pane, CurveItem curve, int iPt)
-        {
+        { string tooltip = null;
+            if (curve.Label.Text == "Altitude2")
+            {
+                if (curve.NPts > iPt)
+                {
 
-            string tooltip = null;
+                    if (list5Compare.Count > 0)
+                    {
+                        foreach (CurveItem cve in pane.CurveList)
+                        {
+                            if (cve.Label.Text == "Altitude")
+                            {
+                                if (cve.NPts > iPt)
+                                {
+                                    double remainder = curve[iPt].Y - cve[iPt].Y;
+                                    string difference = null;
+                                    if (remainder < 0)
+                                    {
+                                        difference = remainder.ToString();
+                                    }
+                                    else
+                                    {
+                                        difference = "+" + remainder.ToString();
+                                    }
+
+                                    tooltip = String.Format(curve.Label.Text + "/" + cve.Label.Text + curve[iPt].Y + "Altitude /" + cve[iPt].Y + "Altitude " + difference);
+                                    break;
+                                }
+                                else
+                                {
+                                    tooltip = String.Format(curve.Label.Text + ": " + curve[iPt].Y + "Altitude");
+                                }
+
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        tooltip = String.Format(curve.Label.Text + ": " + curve[iPt].Y + "Altitude");
+                    }
+
+
+
+
+                }
+
+            }
+            if (curve.Label.Text == "Altitude")
+            {
+                if (curve.NPts > iPt)
+                {
+
+                    if (list5Compare.Count > 0)
+                    {
+                        foreach (CurveItem cve in pane.CurveList)
+                        {
+                            if (cve.Label.Text == "Altitude2")
+                            {
+                                if (cve.NPts > iPt)
+                                {
+                                    double remainder = curve[iPt].Y - cve[iPt].Y;
+                                    string difference = null;
+                                    if (remainder < 0)
+                                    {
+                                        difference = remainder.ToString();
+                                    }
+                                    else
+                                    {
+                                        difference = "+" + remainder.ToString();
+                                    }
+
+                                    tooltip = String.Format(curve.Label.Text + "/" + cve.Label.Text + curve[iPt].Y + "Altitude /" + cve[iPt].Y + "Altitude " + difference);
+                                    break;
+                                }
+                                else
+                                {
+                                    tooltip = String.Format(curve.Label.Text + ": " + curve[iPt].Y + "Altitude");
+                                }
+
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        tooltip = String.Format(curve.Label.Text + ": " + curve[iPt].Y + "Altitude");
+                    }
+
+
+
+
+                }
+
+                string tooltip = null;
             if (curve.Label.Text == "Altitude2")
             {
                 if (curve.NPts > iPt)
