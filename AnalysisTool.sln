@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "analysistool", "WindowsFormsApp6\analysistool.csproj", "{04B5A96B-5D3C-4BBD-B279-5973E1AAE72E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{6C209744-C8FD-41EE-9F21-AE5A34843B1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{04B5A96B-5D3C-4BBD-B279-5973E1AAE72E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04B5A96B-5D3C-4BBD-B279-5973E1AAE72E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04B5A96B-5D3C-4BBD-B279-5973E1AAE72E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C209744-C8FD-41EE-9F21-AE5A34843B1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C209744-C8FD-41EE-9F21-AE5A34843B1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C209744-C8FD-41EE-9F21-AE5A34843B1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C209744-C8FD-41EE-9F21-AE5A34843B1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -34,6 +34,7 @@ namespace WindowsFormsApp6
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainpage));
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button4 = new System.Windows.Forms.Button();
             this.groupBox16 = new System.Windows.Forms.GroupBox();
             this.label50 = new System.Windows.Forms.Label();
             this.PILabel = new System.Windows.Forms.Label();
@@ -118,7 +119,52 @@ namespace WindowsFormsApp6
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.button5 = new System.Windows.Forms.Button();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label76 = new System.Windows.Forms.Label();
+            this.label77 = new System.Windows.Forms.Label();
+            this.label78 = new System.Windows.Forms.Label();
+            this.label79 = new System.Windows.Forms.Label();
+            this.label80 = new System.Windows.Forms.Label();
+            this.label81 = new System.Windows.Forms.Label();
+            this.label82 = new System.Windows.Forms.Label();
+            this.label83 = new System.Windows.Forms.Label();
+            this.label84 = new System.Windows.Forms.Label();
+            this.label85 = new System.Windows.Forms.Label();
+            this.label86 = new System.Windows.Forms.Label();
+            this.label87 = new System.Windows.Forms.Label();
+            this.label88 = new System.Windows.Forms.Label();
+            this.label89 = new System.Windows.Forms.Label();
+            this.label90 = new System.Windows.Forms.Label();
+            this.label91 = new System.Windows.Forms.Label();
+            this.label92 = new System.Windows.Forms.Label();
+            this.label93 = new System.Windows.Forms.Label();
+            this.label94 = new System.Windows.Forms.Label();
+            this.label72 = new System.Windows.Forms.Label();
+            this.label73 = new System.Windows.Forms.Label();
+            this.label74 = new System.Windows.Forms.Label();
+            this.label75 = new System.Windows.Forms.Label();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label69 = new System.Windows.Forms.Label();
+            this.label70 = new System.Windows.Forms.Label();
+            this.label71 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
+            this.label63 = new System.Windows.Forms.Label();
+            this.label64 = new System.Windows.Forms.Label();
+            this.label65 = new System.Windows.Forms.Label();
+            this.label66 = new System.Windows.Forms.Label();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
+            this.label60 = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -130,8 +176,7 @@ namespace WindowsFormsApp6
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.tabPage1.SuspendLayout();
             this.groupBox16.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -141,7 +186,10 @@ namespace WindowsFormsApp6
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -232,6 +280,16 @@ namespace WindowsFormsApp6
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(203, 892);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(256, 28);
+            this.button4.TabIndex = 74;
+            this.button4.Text = "Compare Data";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
             // groupBox16
             // 
             this.groupBox16.Controls.Add(this.label50);
@@ -249,7 +307,7 @@ namespace WindowsFormsApp6
             this.groupBox16.Controls.Add(this.label56);
             this.groupBox16.Controls.Add(this.labelif);
             this.groupBox16.Controls.Add(this.labelnp);
-            this.groupBox16.Location = new System.Drawing.Point(203, 664);
+            this.groupBox16.Location = new System.Drawing.Point(203, 650);
             this.groupBox16.Name = "groupBox16";
             this.groupBox16.Size = new System.Drawing.Size(256, 236);
             this.groupBox16.TabIndex = 73;
@@ -805,7 +863,6 @@ namespace WindowsFormsApp6
             this.label18.Size = new System.Drawing.Size(13, 13);
             this.label18.TabIndex = 19;
             this.label18.Text = "0";
-            this.label18.Click += new System.EventHandler(this.label18_Click);
             // 
             // label17
             // 
@@ -992,12 +1049,13 @@ namespace WindowsFormsApp6
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(12, 63);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(481, 992);
             this.tabControl1.TabIndex = 2;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage2
             // 
@@ -1010,7 +1068,6 @@ namespace WindowsFormsApp6
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "RawData";
             this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
             // listBox1
             // 
@@ -1022,6 +1079,10 @@ namespace WindowsFormsApp6
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.button8);
+            this.tabPage3.Controls.Add(this.button7);
+            this.tabPage3.Controls.Add(this.dataGridView5);
+            this.tabPage3.Controls.Add(this.dataGridView4);
             this.tabPage3.Controls.Add(this.button5);
             this.tabPage3.Controls.Add(this.numericUpDown3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
@@ -1032,13 +1093,457 @@ namespace WindowsFormsApp6
             this.tabPage3.Text = "Chunking";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(351, 20);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(116, 23);
+            this.button8.TabIndex = 7;
+            this.button8.Text = "Chunk Comparison";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(229, 20);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(116, 23);
+            this.button7.TabIndex = 5;
+            this.button7.Text = "Chunk Second File";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // dataGridView5
+            // 
+            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView5.Location = new System.Drawing.Point(7, 475);
+            this.dataGridView5.Name = "dataGridView5";
+            this.dataGridView5.Size = new System.Drawing.Size(460, 412);
+            this.dataGridView5.TabIndex = 4;
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Location = new System.Drawing.Point(7, 49);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.Size = new System.Drawing.Size(460, 420);
+            this.dataGridView4.TabIndex = 3;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(133, 20);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(90, 23);
+            this.button5.TabIndex = 2;
+            this.button5.Text = "Chunk First File";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(20, 73);
+            this.numericUpDown3.Location = new System.Drawing.Point(7, 20);
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(120, 20);
             this.numericUpDown3.TabIndex = 1;
             this.numericUpDown3.ValueChanged += new System.EventHandler(this.numericUpDown3_ValueChanged);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.label76);
+            this.tabPage4.Controls.Add(this.label77);
+            this.tabPage4.Controls.Add(this.label78);
+            this.tabPage4.Controls.Add(this.label79);
+            this.tabPage4.Controls.Add(this.label80);
+            this.tabPage4.Controls.Add(this.label81);
+            this.tabPage4.Controls.Add(this.label82);
+            this.tabPage4.Controls.Add(this.label83);
+            this.tabPage4.Controls.Add(this.label84);
+            this.tabPage4.Controls.Add(this.label85);
+            this.tabPage4.Controls.Add(this.label86);
+            this.tabPage4.Controls.Add(this.label87);
+            this.tabPage4.Controls.Add(this.label88);
+            this.tabPage4.Controls.Add(this.label89);
+            this.tabPage4.Controls.Add(this.label90);
+            this.tabPage4.Controls.Add(this.label91);
+            this.tabPage4.Controls.Add(this.label92);
+            this.tabPage4.Controls.Add(this.label93);
+            this.tabPage4.Controls.Add(this.label94);
+            this.tabPage4.Controls.Add(this.label72);
+            this.tabPage4.Controls.Add(this.label73);
+            this.tabPage4.Controls.Add(this.label74);
+            this.tabPage4.Controls.Add(this.label75);
+            this.tabPage4.Controls.Add(this.label68);
+            this.tabPage4.Controls.Add(this.label69);
+            this.tabPage4.Controls.Add(this.label70);
+            this.tabPage4.Controls.Add(this.label71);
+            this.tabPage4.Controls.Add(this.label67);
+            this.tabPage4.Controls.Add(this.label63);
+            this.tabPage4.Controls.Add(this.label64);
+            this.tabPage4.Controls.Add(this.label65);
+            this.tabPage4.Controls.Add(this.label66);
+            this.tabPage4.Controls.Add(this.label57);
+            this.tabPage4.Controls.Add(this.label58);
+            this.tabPage4.Controls.Add(this.label59);
+            this.tabPage4.Controls.Add(this.label60);
+            this.tabPage4.Controls.Add(this.label61);
+            this.tabPage4.Controls.Add(this.label62);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(473, 966);
+            this.tabPage4.TabIndex = 0;
+            this.tabPage4.Text = "Selected Portion Averages";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(325, 432);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(13, 13);
+            this.label76.TabIndex = 61;
+            this.label76.Text = "0";
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Location = new System.Drawing.Point(221, 432);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(73, 13);
+            this.label77.TabIndex = 60;
+            this.label77.Text = "Cadence Max";
+            // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.Location = new System.Drawing.Point(324, 407);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(13, 13);
+            this.label78.TabIndex = 59;
+            this.label78.Text = "0";
+            // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Location = new System.Drawing.Point(221, 407);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(93, 13);
+            this.label79.TabIndex = 58;
+            this.label79.Text = "Cadence Average";
+            // 
+            // label80
+            // 
+            this.label80.AutoSize = true;
+            this.label80.Location = new System.Drawing.Point(325, 326);
+            this.label80.Name = "label80";
+            this.label80.Size = new System.Drawing.Size(13, 13);
+            this.label80.TabIndex = 57;
+            this.label80.Text = "0";
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(221, 326);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(65, 13);
+            this.label81.TabIndex = 56;
+            this.label81.Text = "Altitude Max";
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Location = new System.Drawing.Point(324, 301);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(13, 13);
+            this.label82.TabIndex = 55;
+            this.label82.Text = "0";
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.Location = new System.Drawing.Point(221, 301);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(85, 13);
+            this.label83.TabIndex = 54;
+            this.label83.Text = "Altitude Average";
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Location = new System.Drawing.Point(24, 267);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(63, 13);
+            this.label84.TabIndex = 53;
+            this.label84.Text = "Second File";
+            // 
+            // label85
+            // 
+            this.label85.AutoSize = true;
+            this.label85.Location = new System.Drawing.Point(130, 432);
+            this.label85.Name = "label85";
+            this.label85.Size = new System.Drawing.Size(13, 13);
+            this.label85.TabIndex = 52;
+            this.label85.Text = "0";
+            // 
+            // label86
+            // 
+            this.label86.AutoSize = true;
+            this.label86.Location = new System.Drawing.Point(24, 432);
+            this.label86.Name = "label86";
+            this.label86.Size = new System.Drawing.Size(60, 13);
+            this.label86.TabIndex = 51;
+            this.label86.Text = "Power Max";
+            // 
+            // label87
+            // 
+            this.label87.AutoSize = true;
+            this.label87.Location = new System.Drawing.Point(130, 407);
+            this.label87.Name = "label87";
+            this.label87.Size = new System.Drawing.Size(13, 13);
+            this.label87.TabIndex = 50;
+            this.label87.Text = "0";
+            // 
+            // label88
+            // 
+            this.label88.AutoSize = true;
+            this.label88.Location = new System.Drawing.Point(24, 407);
+            this.label88.Name = "label88";
+            this.label88.Size = new System.Drawing.Size(80, 13);
+            this.label88.TabIndex = 49;
+            this.label88.Text = "Power Average";
+            // 
+            // label89
+            // 
+            this.label89.AutoSize = true;
+            this.label89.Location = new System.Drawing.Point(130, 352);
+            this.label89.Name = "label89";
+            this.label89.Size = new System.Drawing.Size(13, 13);
+            this.label89.TabIndex = 48;
+            this.label89.Text = "0";
+            // 
+            // label90
+            // 
+            this.label90.AutoSize = true;
+            this.label90.Location = new System.Drawing.Point(130, 327);
+            this.label90.Name = "label90";
+            this.label90.Size = new System.Drawing.Size(13, 13);
+            this.label90.TabIndex = 47;
+            this.label90.Text = "0";
+            // 
+            // label91
+            // 
+            this.label91.AutoSize = true;
+            this.label91.Location = new System.Drawing.Point(130, 301);
+            this.label91.Name = "label91";
+            this.label91.Size = new System.Drawing.Size(13, 13);
+            this.label91.TabIndex = 46;
+            this.label91.Text = "0";
+            // 
+            // label92
+            // 
+            this.label92.AutoSize = true;
+            this.label92.Location = new System.Drawing.Point(22, 352);
+            this.label92.Name = "label92";
+            this.label92.Size = new System.Drawing.Size(79, 13);
+            this.label92.TabIndex = 45;
+            this.label92.Text = "Heart Rate Min";
+            // 
+            // label93
+            // 
+            this.label93.AutoSize = true;
+            this.label93.Location = new System.Drawing.Point(22, 327);
+            this.label93.Name = "label93";
+            this.label93.Size = new System.Drawing.Size(82, 13);
+            this.label93.TabIndex = 44;
+            this.label93.Text = "Heart Rate Max";
+            // 
+            // label94
+            // 
+            this.label94.AutoSize = true;
+            this.label94.Location = new System.Drawing.Point(22, 301);
+            this.label94.Name = "label94";
+            this.label94.Size = new System.Drawing.Size(102, 13);
+            this.label94.TabIndex = 43;
+            this.label94.Text = "Heart Rate Average";
+            // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Location = new System.Drawing.Point(327, 200);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(13, 13);
+            this.label72.TabIndex = 42;
+            this.label72.Text = "0";
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Location = new System.Drawing.Point(223, 200);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(73, 13);
+            this.label73.TabIndex = 41;
+            this.label73.Text = "Cadence Max";
+            // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.Location = new System.Drawing.Point(326, 175);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(13, 13);
+            this.label74.TabIndex = 40;
+            this.label74.Text = "0";
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(223, 175);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(93, 13);
+            this.label75.TabIndex = 39;
+            this.label75.Text = "Cadence Average";
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(327, 94);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(13, 13);
+            this.label68.TabIndex = 38;
+            this.label68.Text = "0";
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Location = new System.Drawing.Point(223, 94);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(65, 13);
+            this.label69.TabIndex = 37;
+            this.label69.Text = "Altitude Max";
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(326, 69);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(13, 13);
+            this.label70.TabIndex = 36;
+            this.label70.Text = "0";
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(223, 69);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(85, 13);
+            this.label71.TabIndex = 35;
+            this.label71.Text = "Altitude Average";
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(26, 35);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(45, 13);
+            this.label67.TabIndex = 34;
+            this.label67.Text = "First File";
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(132, 200);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(13, 13);
+            this.label63.TabIndex = 33;
+            this.label63.Text = "0";
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(26, 200);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(60, 13);
+            this.label64.TabIndex = 32;
+            this.label64.Text = "Power Max";
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(132, 175);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(13, 13);
+            this.label65.TabIndex = 31;
+            this.label65.Text = "0";
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(26, 175);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(80, 13);
+            this.label66.TabIndex = 30;
+            this.label66.Text = "Power Average";
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(132, 120);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(13, 13);
+            this.label57.TabIndex = 29;
+            this.label57.Text = "0";
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(132, 95);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(13, 13);
+            this.label58.TabIndex = 28;
+            this.label58.Text = "0";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(132, 69);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(13, 13);
+            this.label59.TabIndex = 27;
+            this.label59.Text = "0";
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(24, 120);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(79, 13);
+            this.label60.TabIndex = 26;
+            this.label60.Text = "Heart Rate Min";
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(24, 95);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(82, 13);
+            this.label61.TabIndex = 25;
+            this.label61.Text = "Heart Rate Max";
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(24, 69);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(102, 13);
+            this.label62.TabIndex = 24;
+            this.label62.Text = "Heart Rate Average";
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(473, 966);
+            this.tabPage5.TabIndex = 3;
+            this.tabPage5.Text = "tabPage5";
+            this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // dataGridView2
             // 
@@ -1050,7 +1555,7 @@ namespace WindowsFormsApp6
             // 
             // zedGraphControl1
             // 
-            this.zedGraphControl1.Location = new System.Drawing.Point(499, 86);
+            this.zedGraphControl1.Location = new System.Drawing.Point(500, 87);
             this.zedGraphControl1.Name = "zedGraphControl1";
             this.zedGraphControl1.ScrollGrace = 0D;
             this.zedGraphControl1.ScrollMaxX = 0D;
@@ -1065,7 +1570,6 @@ namespace WindowsFormsApp6
             this.zedGraphControl1.ZoomEvent += new ZedGraph.ZedGraphControl.ZoomEventHandler(this.zedGraphControl1_ZoomEvent);
             this.zedGraphControl1.PointValueEvent += new ZedGraph.ZedGraphControl.PointValueHandler(this.ZedGraphControl1_PointValueEvent);
             this.zedGraphControl1.MouseDownEvent += new ZedGraph.ZedGraphControl.ZedMouseEventHandler(this.zedGraphControl1_MouseDownEvent);
-            this.zedGraphControl1.Load += new System.EventHandler(this.zedGraphControl1_Load_1);
             // 
             // checkBox1
             // 
@@ -1140,7 +1644,6 @@ namespace WindowsFormsApp6
             this.dataGridView1.Size = new System.Drawing.Size(1402, 981);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.Visible = false;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // checkBox6
             // 
@@ -1177,31 +1680,21 @@ namespace WindowsFormsApp6
             this.dataGridView3.TabIndex = 12;
             this.dataGridView3.Visible = false;
             // 
-            // button4
+            // button6
             // 
-            this.button4.Location = new System.Drawing.Point(203, 906);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(256, 39);
-            this.button4.TabIndex = 74;
-            this.button4.Text = "Compare Data";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click_1);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(280, 87);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 2;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button6.Location = new System.Drawing.Point(16, 24);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 13;
+            this.button6.Text = "button6";
+            this.button6.UseVisualStyleBackColor = true;
             // 
             // mainpage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.checkBox7);
             this.Controls.Add(this.checkBox6);
             this.Controls.Add(this.checkBox5);
@@ -1228,7 +1721,11 @@ namespace WindowsFormsApp6
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
@@ -1340,6 +1837,51 @@ namespace WindowsFormsApp6
         private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.Label label77;
+        private System.Windows.Forms.Label label78;
+        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.Label label80;
+        private System.Windows.Forms.Label label81;
+        private System.Windows.Forms.Label label82;
+        private System.Windows.Forms.Label label83;
+        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.Label label85;
+        private System.Windows.Forms.Label label86;
+        private System.Windows.Forms.Label label87;
+        private System.Windows.Forms.Label label88;
+        private System.Windows.Forms.Label label89;
+        private System.Windows.Forms.Label label90;
+        private System.Windows.Forms.Label label91;
+        private System.Windows.Forms.Label label92;
+        private System.Windows.Forms.Label label93;
+        private System.Windows.Forms.Label label94;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.Label label74;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.DataGridView dataGridView5;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
     }
 }
 

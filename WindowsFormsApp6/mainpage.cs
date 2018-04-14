@@ -13,29 +13,47 @@ using System.Windows.Forms;
 using ZedGraph;
 using System.Collections.Generic;
 using System.Linq;
+using AnalysisTool;
+
 namespace WindowsFormsApp6
 {
     public partial class mainpage : MetroFramework.Forms.MetroForm
     {
+      
         int difference;
         int powerb;
         int numericupdown;
-
+        int checkCount = 0;
         TimeSpan globaltime;
         TimeSpan globaltime2;
-
+        bool chunkingbool2 = false;
         List<double> movAvgPow4 = new List<double>();
         List<double> movAvg = new List<double>();
         List<double> movAvgPow4Slt = new List<double>();
         List<double> movAvgSlt = new List<double>();
-
-
+        double speedTotalRange = 0;
+        double speedMaximumRange = 0;
+        double altitudeTotalRange = 0;
+        double altitudeMaximumRange = 0;
+        int heartRateTotalRange = 0;
+        int heartRateMaximumRange = 0;
+        int heartRateMinimumRange = 0;
+        int powerTotalRange = 0;
+        int powerMaximumRange = 0;
+        decimal distanceTotalRange = 0;
+        bool distanceCalculationFlagRange = false;
+        bool chunkingbool;
+        List<List<string>> data = new List<List<string>>();
         public static List<String> HRDATA1 = new List<String>();
         public static List<String> HRDATA2 = new List<String>();
 
+        public static List<String> HRDATA1Compare = new List<String>();
+        public static List<String> HRDATA2Compare = new List<String>();
+        int startpoint;
+        int endpoint;
         public static List<String> ParamDataa1 = new List<String>();
         public static List<String> ParamDataa2 = new List<String>();
-
+        bool zoomin;
         public static List<TimeSpan> totalTime = new List<TimeSpan>();
         double movAvgCount;
         int pbl;
@@ -45,8 +63,9 @@ namespace WindowsFormsApp6
         int pbr2;
         int pbi2;
         int balance;
-
-
+        int maxhr2;
+            int minhr2;
+        double avghr2;
 
         double avghr;
         int NP1;
@@ -62,7 +81,7 @@ namespace WindowsFormsApp6
         string starttime = "";
         string length = "";
         string weight = "";
-        string pathglob;
+        public string pathglob;
         string USEURO = "";
         string pindex = "";
         string cadence = "";
@@ -77,13 +96,14 @@ namespace WindowsFormsApp6
         double HRaverage;
         double maxheartratepercentage;
         double speedavg;
-
+        int portionValue = 0;
+        int tickBoxValue = 0;
         string cadence2 = "";
         string altitude2 = "";
         string power2 = "";
         double minutes2;
         string speed2;
-
+        int numberofchunks;
         long PowerB, leftMask, PedIndMask;
         string PBbinary, leftBin, PiBin;
         public double lvalue, pvalue, rvalue;
@@ -106,7 +126,7 @@ namespace WindowsFormsApp6
         PointPairList list3Compare = new PointPairList();
         PointPairList list4Compare = new PointPairList();
         PointPairList list5Compare = new PointPairList();
-
+        List<decimal> distanceList = new List<decimal>();
         List<int> list6 = new List<int>();
         List<int> list7 = new List<int>();
         List<int> list8 = new List<int>();
@@ -119,6 +139,9 @@ namespace WindowsFormsApp6
 
         List<TimeSpan> TimeList = new List<TimeSpan>();
         List<TimeSpan> TimeList2 = new List<TimeSpan>();
+        List<TimeSpan> TimeList3 = new List<TimeSpan>();
+        List<TimeSpan> TimeList4 = new List<TimeSpan>();
+        List<string> TimeList6 = new List<string>();
         List<int> HeartRateList = new List<int>();
         List<int> SpeedList = new List<int>();
         List<int> CadenceList = new List<int>();
@@ -131,6 +154,25 @@ namespace WindowsFormsApp6
         List<int> altitudeListCompare = new List<int>();
         List<int> PowerlistCompare = new List<int>();
 
+        List<int> HeartRateListCompare2 = new List<int>();
+        List<int> SpeedListCompare2 = new List<int>();
+        List<int> CadenceListCompare2 = new List<int>();
+        List<int> altitudeListCompare2 = new List<int>();
+        List<int> PowerlistCompare2 = new List<int>();
+
+
+        List<int> HeartRateListChunk = new List<int>();
+        List<int> SpeedListChunk = new List<int>();
+        List<int> CadenceListChunk = new List<int>();
+        List<int> altitudeListChunk = new List<int>();
+        List<int> PowerlistChunk = new List<int>();
+
+        List<int> HeartRateListChunk2 = new List<int>();
+        List<int> SpeedListChunk2 = new List<int>();
+        List<int> CadenceListChunk2 = new List<int>();
+        List<int> altitudeListChunk2 = new List<int>();
+        List<int> PowerlistChunk2 = new List<int>();
+
         List<int> HeartRateList2 = new List<int>();
         List<int> SpeedList2 = new List<int>();
         List<int> CadenceList2 = new List<int>();
@@ -138,7 +180,7 @@ namespace WindowsFormsApp6
         List<int> Powerlist2 = new List<int>();
 
         int versionval;
-        string userName;
+        public string userName;
         string monitortype;
         decimal maxspeed;
         double altmax;
@@ -181,13 +223,20 @@ namespace WindowsFormsApp6
         DataTable dt = new DataTable();
         DataTable dt2 = new DataTable();
         DataTable dt3 = new DataTable();
+        DataTable dt4 = new DataTable();
+        DataTable dt5 = new DataTable();
+        DataTable dt6 = new DataTable();
         int intcounter = 0;
-        int[] intervals = new int[20] { 0, 3800, 0, 3800, 0, 3800, 0, 3800, 0, 3800, 0, 3800, 0, 3800, 0, 3800, 0, 3800, 0, 3800 };
+       public int[] intervals = new int[20] { 0, 3800, 0, 3800, 0, 3800, 0, 3800, 0, 3800, 0, 3800, 0, 3800, 0, 3800, 0, 3800, 0, 3800 };
         public mainpage()
         {
             InitializeComponent();
         }
-        private void FindIntervals()
+
+        /// <summary>
+        /// finding the intervals within the data array intervals
+        /// </summary>
+        public void FindIntervals()
         {
             bool Over = false;
             int loc = 0;
@@ -226,7 +275,10 @@ namespace WindowsFormsApp6
                 }
             }
         }
-        private void intervalpicker()
+   /// <summary>
+   /// this is used to loop through the intervals.
+   /// </summary>
+        public void intervalpicker()
         {
             int high = 0;
             int low = 0;
@@ -285,7 +337,13 @@ namespace WindowsFormsApp6
             intervalbox.Text = Convert.ToString(intcounter);
 
         }
-        private void Form1_Load(object sender, EventArgs e)
+
+        /// <summary>
+        /// loads properties on form load.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void Form1_Load(object sender, EventArgs e)
         {
             userName = Environment.UserName;
             //navigae to the director and create folder for values to be passed through if you dont already have it.
@@ -308,11 +366,10 @@ namespace WindowsFormsApp6
                 }
             }
         }
-
         /// <summary>
         /// this is where the graph is loaded and the series are plotting.
         /// </summary>
-        private void LoadGraph()
+        public void LoadGraph()
         {
             dataGridView1.DataSource = dt;
             dataGridView3.DataSource = dt2;
@@ -485,7 +542,7 @@ namespace WindowsFormsApp6
             dataGridView3.DataSource = dt2;
             bool1 = true;
         }
-        private void CompareAnalyse()
+        public void CompareAnalyse()
         {
             dt3.Columns.Add("File", typeof(string));
             dt3.Columns.Add("Heart Rate (BPM)", typeof(string));
@@ -549,6 +606,7 @@ namespace WindowsFormsApp6
                    if (SpeedOn)
                     {
                         int HRspeed = Convert.ToInt32(SpeedListCompare[i]) / 10;
+
                         string speedstring = HRspeed.ToString();
                         dr["Speed"] = speedstring;
                     }
@@ -634,26 +692,22 @@ namespace WindowsFormsApp6
 
         }
 
-
-
-
         /// <summary>
-        /// this is where the analysiso f the data takes place.
+        /// this is where the analysiso of the data takes place. also at the end a bool is used to compare data if the bool is true the comparison data is outputted to a datagridview.
         /// </summary>
-        private void Analyse()
+        public void Analyse()
         {
             //nuke everything...
        
  
             listBox3.Items.Clear();
-   
+
 
             //data table columns
- 
 
-            if (bool1 == true)
+
+            if (bool1 == true && chunkingbool == false && chunkingbool2 == false)
             {
-
                 string[] lines2 = System.IO.File.ReadAllLines(pathglob);
 
                 dt2.Columns.Add("Time", typeof(TimeSpan));
@@ -670,6 +724,8 @@ namespace WindowsFormsApp6
                 .ToList();
 
                 listBox1.DataSource = HRDATA2;
+                HRDATA2Compare = HRDATA2;
+                
 
                 List<String> ParamData2 = File.ReadLines(pathglob)
          .SkipWhile(line => line != "[Params]")
@@ -682,7 +738,7 @@ namespace WindowsFormsApp6
                 listBox3.Items.Add("SMODE VALUES:");
                 listBox3.Items.Add("---------------------");
                 string[] Splitlength2;
-                count = 0;
+               count = 0;
                 TimeSpan time2 = TimeSpan.FromSeconds(count * interval);
 
                 TimeList.Add(time2);
@@ -917,6 +973,8 @@ namespace WindowsFormsApp6
 
                 for (int i = 0; i < HRDATA2.Count; i++)
                 {
+                   
+
                     count2++;
                     string[] splitter = HRDATA2[i].Split('\t');
                     heartrate2 = splitter[0].ToString();
@@ -929,7 +987,7 @@ namespace WindowsFormsApp6
 
                     TimeList2.Add(time);
 
-                  
+
 
                     DataRow dr2 = dt2.NewRow();
 
@@ -1034,7 +1092,13 @@ namespace WindowsFormsApp6
 
                             }
                         }
-
+                        CadenceAverage2 = CadenceListCompare.Average();
+                        avgpower2 = PowerlistCompare.Average();
+                        maxpower2 = PowerlistCompare.Max();
+                        maxspeed2 = (SpeedListCompare.Max());
+                        speedavg2 = (SpeedListCompare.Average());
+                        altmax2 = altitudeListCompare.Max();
+                        AltitAVG2 = altitudeListCompare.Average();
                         //if (power3on == true)
                         //{
                         //    power = splitter[columnindex].ToString();
@@ -1045,17 +1109,11 @@ namespace WindowsFormsApp6
                         //}
                         dt2.Rows.Add(dr2);
                     }
-                    CadenceAverage2 = CadenceListCompare.Average();
-                    avgpower2 = PowerlistCompare.Average();
-                    maxpower2 = PowerlistCompare.Max();
-                    maxspeed2 = (SpeedListCompare.Max());
-                    speedavg2 = (SpeedListCompare.Average());
-                    altmax2 = altitudeListCompare.Max();
-                    AltitAVG2 = altitudeListCompare.Average();
                 }
 
             }
-
+          
+         
             if (bool1 == false)
             {
                 dt.Columns.Add("Time", typeof(TimeSpan));
@@ -1335,12 +1393,13 @@ namespace WindowsFormsApp6
                     HeartRateList.Add(Convert.ToInt32(heartrate));
                     list.Add(Convert.ToDouble(count), Convert.ToDouble(heartrate));
                     int columnindex = 1;
-
+               
                     //creating the timespan.
                     TimeSpan time = TimeSpan.FromSeconds(count * interval);
 
                     TimeList.Add(time);
-
+                    string timeString = time.ToString(@"hh\:mm\:ss");
+                    TimeList6.Add(timeString);
                     DataRow dr = dt.NewRow();
                   
                   
@@ -1351,7 +1410,7 @@ namespace WindowsFormsApp6
                     if (SpeedOn == true)
                     {
                         speed = splitter[columnindex].ToString();
-
+                        distanceList.Add(Convert.ToInt32(speed) / 3600);
 
                         double SpeedKPH = Convert.ToInt32(speed) / 10;
                         double SpeedMPH = SpeedKPH / 1.609;
@@ -1518,64 +1577,528 @@ namespace WindowsFormsApp6
                 altmax = altitudeList.Max();
                 AltitAVG = altitudeList.Average();
             }
+
+            if (chunkingbool == true)
+            {
+
+                for (int i = 0; i < numberofchunks; i++)
+                {
+
+
+                    count2++;
+                    string[] splitter = HRDATA2[i].Split('\t');
+                    heartrate2 = splitter[0].ToString();
+                    HeartRateListChunk.Add(Convert.ToInt32(heartrate2));
+                    listCompare.Add(Convert.ToDouble(count2), Convert.ToDouble(heartrate));
+                    int columnindex = 1;
+
+                    //creating the timespan.
+                    TimeSpan time = TimeSpan.FromSeconds(count2 * interval);
+
+                    TimeList2.Add(time);
+
+
+
+
+
+                    if (SpeedOn == true)
+                    {
+                        speed2 = splitter[columnindex].ToString();
+                        double SpeedKPH2 = Convert.ToInt32(speed2) / 10;
+                        double SpeedMPH2 = SpeedKPH2 / 1.609;
+                        if (kmph.Checked == true)
+                        {
+                            SpeedListChunk.Add(Convert.ToInt32(SpeedKPH2));
+                            list2Compare.Add(Convert.ToDouble(count), Convert.ToInt32(SpeedKPH2));
+                            label34.Text = "KM/H";
+                            label35.Text = "Kilometers";
+
+                        }
+                        else if (mph.Checked == true)
+                        {
+                            SpeedListChunk.Add(Convert.ToInt32(SpeedMPH2));
+                            list2Compare.Add(Convert.ToDouble(count2), SpeedMPH2);
+                            label34.Text = "MP/H";
+                            label35.Text = "Miles";
+
+                        }
+
+                        columnindex++;
+                    }
+                    if (CadenceOn == true)
+                    {
+                        cadence2 = splitter[columnindex].ToString();
+                        CadenceListChunk.Add(Convert.ToInt32(splitter[columnindex]));
+                        list4Compare.Add(Convert.ToDouble(count2), Convert.ToDouble(cadence2));
+                        columnindex++;
+
+
+                    }
+                    if (AltitudeOn == true)
+                    {
+                        altitude2 = splitter[columnindex].ToString();
+
+                        if (bool1 == true)
+                        {
+                            altitudeListChunk.Add(Convert.ToInt32(splitter[columnindex]));
+                            list3Compare.Add(Convert.ToDouble(count2), Convert.ToDouble(altitude));
+                            columnindex++;
+
+
+                        }
+                        if (PowerOn == true)
+                        {
+                            power2 = splitter[columnindex].ToString();
+
+
+                            PowerlistChunk.Add(Convert.ToInt32(splitter[columnindex]));
+                            list5Compare.Add(Convert.ToDouble(count2), Convert.ToDouble(power2));
+
+                            columnindex++;
+
+                        }
+                        if (Power2On == true)
+                        {
+                            string powerbalance2 = splitter[columnindex].ToString();
+                            int powerb2 = Convert.ToInt32(powerbalance2);
+                            byte[] bytearray = BitConverter.GetBytes(powerb2);
+                            pbl2 = bytearray[0];
+                            pbr2 = 100 - bytearray[0];
+                            pbi2 = bytearray[1];
+
+                            list6Compare.Add(Convert.ToInt32(pbl2));
+                            list7Compare.Add(Convert.ToInt32(pbr2));
+                            list8Compare.Add(Convert.ToInt32(pbi2));
+
+                            avgpbl = list6Compare.Average();
+                            avgpbr = list7Compare.Average();
+                            avgpbi = list8Compare.Average();
+
+
+
+                            columnindex++;
+                        }
+                        if (power3on == true)
+                        {
+
+                            columnindex++;
+                        }
+                        if (ccdata == true)
+                        {
+                            columnindex++;
+                        }
+                        if (USEUROon == true)
+                        {
+                            mph.Checked = true;
+                            columnindex++;
+                        }
+
+                        if (versionval == 107)
+                        {
+                            if (AIRPOn == true)
+                            {
+
+                            }
+                        }
+
+                        //if (power3on == true)
+                        //{
+                        //    power = splitter[columnindex].ToString();
+                        //    Powerlist.Add(Convert.ToInt32(splitter[columnindex]));
+                        //    list5.Add(Convert.ToDouble(count), Convert.ToDouble(power));
+                        //    columnindex++;
+
+                        //}
+
+
+                    }
+
+                }
+                DataRow dr4 = dt4.NewRow();
+
+                dr4["Number of Chunks"] = "Chunk =" + Convert.ToInt32(count);
+                dr4["Average HeartRate"] = HeartRateListChunk.Average();
+                dr4["Average Speed"] = SpeedListChunk.Average();
+                dr4["Average Cadence"] = CadenceListChunk.Average();
+                dr4["Average Altitude"] = altitudeListChunk.Average();
+                dr4["Average Power"] = PowerlistChunk.Average();
+
+
+
+                dt4.Rows.Add(dr4);
+                chunkingbool = false;
+            }
+
+            int comparisonHr = 0;
+            int comparisonspeed = 0;
+            int comparisonaltit = 0;
+            int comparisonpower = 0;
+            int comparisoncad = 0;
+
+            if (chunkingbool2 == true )
+            {
+
+                for (int i = 0; i < numberofchunks; i++)
+                {
+
+
+                    count2++;
+                    string[] splitter = HRDATA2[i].Split('\t');
+                    heartrate2 = splitter[0].ToString();
+                    HeartRateListChunk2.Add(Convert.ToInt32(heartrate2));
+                    listCompare.Add(Convert.ToDouble(count2), Convert.ToDouble(heartrate));
+                    int columnindex = 1;
+
+                    //creating the timespan.
+                    TimeSpan time = TimeSpan.FromSeconds(count2 * interval);
+
+                    TimeList2.Add(time);
+
+
+
+
+
+                    if (SpeedOn == true)
+                    {
+                        speed2 = splitter[columnindex].ToString();
+                        double SpeedKPH2 = Convert.ToInt32(speed2) / 10;
+                        double SpeedMPH2 = SpeedKPH2 / 1.609;
+                        if (kmph.Checked == true)
+                        {
+                            SpeedListChunk2.Add(Convert.ToInt32(SpeedKPH2));
+                            list2Compare.Add(Convert.ToDouble(count), Convert.ToInt32(SpeedKPH2));
+                            label34.Text = "KM/H";
+                            label35.Text = "Kilometers";
+
+                        }
+                        else if (mph.Checked == true)
+                        {
+                            SpeedListChunk2.Add(Convert.ToInt32(SpeedMPH2));
+                            list2Compare.Add(Convert.ToDouble(count2), SpeedMPH2);
+                            label34.Text = "MP/H";
+                            label35.Text = "Miles";
+
+                        }
+
+                        columnindex++;
+                    }
+                    if (CadenceOn == true)
+                    {
+                        cadence2 = splitter[columnindex].ToString();
+                        CadenceListChunk2.Add(Convert.ToInt32(splitter[columnindex]));
+                        list4Compare.Add(Convert.ToDouble(count2), Convert.ToDouble(cadence2));
+                        columnindex++;
+
+
+                    }
+                    if (AltitudeOn == true)
+                    {
+                        altitude2 = splitter[columnindex].ToString();
+
+                        if (bool1 == true)
+                        {
+                            altitudeListChunk2.Add(Convert.ToInt32(splitter[columnindex]));
+                            list3Compare.Add(Convert.ToDouble(count2), Convert.ToDouble(altitude));
+                            columnindex++;
+
+
+                        }
+                        if (PowerOn == true)
+                        {
+                            power2 = splitter[columnindex].ToString();
+
+
+                            PowerlistChunk2.Add(Convert.ToInt32(splitter[columnindex]));
+                            list5Compare.Add(Convert.ToDouble(count2), Convert.ToDouble(power2));
+
+                            columnindex++;
+
+                        }
+                        if (Power2On == true)
+                        {
+                            string powerbalance2 = splitter[columnindex].ToString();
+                            int powerb2 = Convert.ToInt32(powerbalance2);
+                            byte[] bytearray = BitConverter.GetBytes(powerb2);
+                            pbl2 = bytearray[0];
+                            pbr2 = 100 - bytearray[0];
+                            pbi2 = bytearray[1];
+
+                            list6Compare.Add(Convert.ToInt32(pbl2));
+                            list7Compare.Add(Convert.ToInt32(pbr2));
+                            list8Compare.Add(Convert.ToInt32(pbi2));
+
+                            avgpbl = list6Compare.Average();
+                            avgpbr = list7Compare.Average();
+                            avgpbi = list8Compare.Average();
+
+
+
+                            columnindex++;
+                        }
+                        if (power3on == true)
+                        {
+
+                            columnindex++;
+                        }
+                        if (ccdata == true)
+                        {
+                            columnindex++;
+                        }
+                        if (USEUROon == true)
+                        {
+                            mph.Checked = true;
+                            columnindex++;
+                        }
+
+                        if (versionval == 107)
+                        {
+                            if (AIRPOn == true)
+                            {
+
+                            }
+                        }
+
+                        //if (power3on == true)
+                        //{
+                        //    power = splitter[columnindex].ToString();
+                        //    Powerlist.Add(Convert.ToInt32(splitter[columnindex]));
+                        //    list5.Add(Convert.ToDouble(count), Convert.ToDouble(power));
+                        //    columnindex++;
+
+                        //}
+
+
+                    }
+
+                }
+                DataRow dr5 = dt5.NewRow();
+
+                dr5["Number of Chunks"] = "Chunk =" + Convert.ToInt32(count);
+                dr5["Average HeartRate"] = HeartRateListChunk2.Average();
+                comparisonHr = Convert.ToInt32(HeartRateListChunk2.Average());
+                dr5["Average Speed"] = SpeedListChunk2.Average();
+                comparisonspeed = Convert.ToInt32(SpeedListChunk2.Average());
+                dr5["Average Cadence"] = CadenceListChunk2.Average();
+                comparisoncad = Convert.ToInt32(CadenceListChunk2.Average());
+                dr5["Average Altitude"] = altitudeListChunk2.Average();
+                comparisonaltit = Convert.ToInt32(altitudeListChunk2.Average());
+                dr5["Average Power"] = PowerlistChunk2.Average();
+                comparisonpower = Convert.ToInt32(PowerlistChunk2.Average());
+
+
+                dt5.Rows.Add(dr5);
+
+
+
+                //DataGridViewRow rowOriginalFile = dataGridView4.Rows[i];
+
+
+
+            }
+
+            HeartRateList2 = HeartRateList;
+            SpeedList2 = SpeedList;
+            CadenceList2 = CadenceList;
+            altitudeList2 = altitudeList;
+            Powerlist2 = Powerlist;
+
+            HeartRateListCompare2 = HeartRateListCompare;
+            SpeedListCompare2 = SpeedListCompare;
+            CadenceListCompare2 = CadenceListCompare;
+            altitudeListCompare2 = altitudeListCompare;
+            PowerlistCompare2 = PowerlistCompare;
+            TimeList3 = TimeList;
+            TimeList4 = TimeList2;
         
-
-
-
-
-
-
-
-   
-       
-
-
-        
-
-
             sumcalcs();
-            getNP();
-            LoadGraph();
+           
+            if (chunkingbool == false && chunkingbool2 == false)
+            {
+                LoadGraph();
+            }
+
+            if (chunkingbool2 == true)
+            {
+                int currentRow = count;
+                DataGridViewRow firstRow = dataGridView4.Rows[currentRow - 1];
+
+
+                int hrDif = (Convert.ToInt32(firstRow.Cells[1].Value)) - comparisonHr;
+                int Speeddif = (Convert.ToInt32(firstRow.Cells[1].Value)) - comparisonspeed;
+
+                int cadencedif = (Convert.ToInt32(firstRow.Cells[1].Value)) - comparisoncad;
+                int altitudedif = (Convert.ToInt32(firstRow.Cells[1].Value)) - comparisonaltit;
+                int powerdif = (Convert.ToInt32(firstRow.Cells[1].Value)) - comparisonpower;
+                DataRow dr5 = dt5.NewRow();
+
+                dr5["Number of Chunks"] = "Dif";
+                dr5["Average HeartRate"] = hrDif;
+                dr5["Average Speed"] = Speeddif;
+                dr5["Average Cadence"] = cadencedif;
+                dr5["Average Altitude"] = altitudedif;
+                dr5["Average Power"] = powerdif;
+
+                dt5.Rows.Add(dr5);
+            }
 
         }
 
-    private void chunking()
+        /// <summary>
+        ///  chunking of the first file happens here.
+        /// </summary>
+        private void chunking()
         {
-            int numberofchunks = Convert.ToInt32(numericUpDown3.Value);
+            altitudeListChunk.Clear();
+            HeartRateListChunk.Clear();
+            PowerlistChunk.Clear();
+            CadenceListChunk.Clear();
+            altitudeListChunk.Clear();
+
+
+
+            dt4.Clear();
+            dt4.Columns.Clear();
+            count = 0;
+            DataRow dr = dt4.NewRow();
+            numberofchunks = Convert.ToInt32(numericUpDown3.Value);
             int numberofrecords = HRDATA1.Count;
             numberofrecords -= (numberofrecords % numberofchunks);
             int difference = numberofrecords / numberofchunks;
+            List<List<string>> Chunks = new List<List<string>>();
 
-            List<string> Chunks = new List<string>();
-            for(int i = 0; i < numberofrecords; i += difference)
+
+            dt4.Columns.Add("Number of Chunks", typeof(string));
+            dt4.Columns.Add("Average HeartRate", typeof(int));
+            dt4.Columns.Add("Average Speed", typeof(int));
+            dt4.Columns.Add("Average Cadence", typeof(int));
+            dt4.Columns.Add("Average Altitude", typeof(int));
+            dt4.Columns.Add("Average Power", typeof(int));
+
+
+            for (int i = 0; i < numberofrecords; i += difference)
             {
                 List<string> currentchunk = new List<string>();
                 for (int j = i; j < i + difference; j++)
                 {
                     currentchunk.Add(HRDATA1[j]);
                 }
-                Chunks.Add(Convert.ToString(currentchunk));
+                Chunks.Add(currentchunk);
             }
-            List<string> data = new List<string>();
-            foreach(var chunk in Chunks)
-            {
-                data.Add(chunk.ToString());
 
+            List<List<string>> data = new List<List<string>>();
+
+            foreach (var chunk in Chunks)
+            {
+
+                count++;
+                Console.WriteLine(count);
+                chunkingbool = true;
+                data.Add(chunk);
+                HRDATA2 = chunk;
+                Analyse();
+
+            }
+
+            dataGridView4.DataSource = dt4;
+            chunkingbool = false;
+        }
+        /// <summary>
+        /// chunking of second file.
+        /// </summary>
+        private void chunking2() { 
+            altitudeListChunk2.Clear();
+            HeartRateListChunk2.Clear();
+            PowerlistChunk2.Clear();
+            CadenceListChunk2.Clear();
+            altitudeListChunk2.Clear();
+
+
+            if (HeartRateListCompare.Count > 0)
+            {
+
+                dt5.Clear();
+                dt5.Columns.Clear();
+                count = 0;
+                DataRow dr2 = dt5.NewRow();
+                numberofchunks = Convert.ToInt32(numericUpDown3.Value);
+                int numberofrecords = HRDATA2Compare.Count;
+                numberofrecords -= (numberofrecords % numberofchunks);
+                int difference = numberofrecords / numberofchunks;
+                List<List<string>> Chunks = new List<List<string>>();
+
+
+                dt5.Columns.Add("Number of Chunks", typeof(string));
+                dt5.Columns.Add("Average HeartRate", typeof(int));
+                dt5.Columns.Add("Average Speed", typeof(int));
+                dt5.Columns.Add("Average Cadence", typeof(int));
+                dt5.Columns.Add("Average Altitude", typeof(int));
+                dt5.Columns.Add("Average Power", typeof(int));
+
+
+                for (int i = 0; i < numberofrecords; i += difference)
+                {
+                    List<string> currentchunk = new List<string>();
+                    for (int j = i; j < i + difference; j++)
+                    {
+                        currentchunk.Add(HRDATA2Compare[j]);
+                    }
+                    Chunks.Add(currentchunk);
+                }
+
+                List<List<string>> data2 = new List<List<string>>();
+
+                foreach (var chunk in Chunks)
+                {
+
+                    count++;
+                    Console.WriteLine(count);
+                    chunkingbool2 = true;
+                    data.Add(chunk);
+                    HRDATA2 = chunk;
+                    Analyse();
+
+                }
+
+                dataGridView5.DataSource = dt5;
+                chunkingbool2 = false;
             }
         }
 
+        /// <summary>
+        /// summary of the calculations outputs into textboxes and averages.
+        /// </summary>
         private void sumcalcs()
             {
 
 
             try
             {
-                if (bool1 == true)
+                if (HeartRateListCompare.Count > 0 )
                 {
 
-                    maxhr = HeartRateListCompare.Max();
-                    minhr = HeartRateListCompare.Min();
-                    avghr = HeartRateListCompare.Average();
+                    maxhr2 = HeartRateListCompare.Max();
+                    minhr2 = HeartRateListCompare.Min();
+                    avghr2 = HeartRateListCompare.Average();
+
+                    AltitAVG2 = altitudeListCompare.Average();
+                    altmax2 = altitudeListCompare.Max();
+
+                    maxpower2 = PowerlistCompare.Max();
+                    avgpower2 = PowerlistCompare.Average();
+
+                    CadenceAverage2 = CadenceListCompare.Average();
+                    decimal Cadencemax2 = CadenceListCompare.Max();
+
+
+                    label78.Text = Convert.ToString(Math.Round(CadenceAverage2));
+                    label76.Text = Convert.ToString(Math.Round(Cadencemax2));
+                    label89.Text = minhr2.ToString();
+                    label90.Text = maxhr2.ToString();
+                    label91.Text = avghr2.ToString();
+                    label80.Text = Convert.ToString(Math.Round(altmax2));
+                    label82.Text = Convert.ToString(Math.Round(AltitAVG2));
+                    label85.Text = Convert.ToString(Math.Round(maxpower2));
+                    label87.Text = Convert.ToString(Math.Round(avgpower2));
                     PBLeft.Text = Convert.ToString(Math.Round(Convert.ToDecimal(avgpbl2)));
                     PBRight.Text = Convert.ToString(Math.Round(Convert.ToDecimal(avgpbr2)));
                     PILabel.Text = Convert.ToString(Math.Round(Convert.ToDecimal(avgpbi2)));
@@ -1598,15 +2121,33 @@ namespace WindowsFormsApp6
                     label28.Text = Convert.ToString(Math.Round(altmax));
                 }
 
-                else
-                {
+
+               if (HeartRateList.Count > 0) { 
                     //getting max heart rate.
                     maxhr = HeartRateList.Max();
-                    minhr = HeartRateList.Min();
+                  
                     avghr = HeartRateList.Average();
+                     minhr = HeartRateList.Min();
+
+                    maxpower = Powerlist.Max();
+                    avgpower = Powerlist.Average();
+
+                    altmax = altitudeList.Max();
+                    AltitAVG = altitudeList.Average();
+
+                    CadenceAverage = CadenceList.Average();
+                    decimal Cadencemax = CadenceList.Max();
 
                     //doing the calculations.
-
+                    label74.Text = Convert.ToString(Math.Round(CadenceAverage));
+                    label72.Text = Convert.ToString(Math.Round(Cadencemax));
+                    label63.Text = Convert.ToString(Math.Round(maxpower));
+                    label65.Text = Convert.ToString(Math.Round(avgpower));
+                    label68.Text = Convert.ToString(Math.Round(altmax));
+                    label70.Text = Convert.ToString(Math.Round(AltitAVG));
+                    label57.Text = minhr.ToString();
+                    label58.Text = maxhr.ToString();
+                    label59.Text = avghr.ToString();
                     PBLeft.Text = Convert.ToString(Math.Round(Convert.ToDecimal(avgpbl)));
                     PBRight.Text = Convert.ToString(Math.Round(Convert.ToDecimal(avgpbr)));
                     PILabel.Text = Convert.ToString(Math.Round(Convert.ToDecimal(avgpbi)));
@@ -1659,9 +2200,12 @@ namespace WindowsFormsApp6
                 if (Monitorval == 38) { label37.Text = "Model: " + "Polar RS800X"; }
 
             }
-            private void getNP()
+        /// <summary>
+        /// creates the normalised power.
+        /// </summary>
+            public void getNP()
             {
-                int value = Powerlist.Count();
+               int value = Powerlist.Count();
                 // movAvgCount = value;
                 //  MessageBox.Show(value.ToString());
 
@@ -1693,7 +2237,7 @@ namespace WindowsFormsApp6
                     labelnp.Visible = true;                                         // movingAverageGlobal = movingAverageValue;  
                     labelnp.Text = normalizationPower.ToString();
                     // ftp value 
-                    double ftpData = 300;
+                    double ftpData = Convert.ToDouble(ftpbox.Text);
 
                     double ifGlobal = normalizationPower / ftpData;
                     labelif.Visible = true;
@@ -1712,12 +2256,20 @@ namespace WindowsFormsApp6
                     labeltss.Text = tssGlobal.ToString();
                 }
             }
-
-            private void zedGraphControl1_Load(object sender, EventArgs e)
+        /// <summary>
+        /// loads the zed graph.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void zedGraphControl1_Load(object sender, EventArgs e)
             {
 
             }
-
+        /// <summary>
+        /// opening the file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
             private void button1_Click(object sender, EventArgs e)
             {
                 //opening the file.
@@ -1735,16 +2287,18 @@ namespace WindowsFormsApp6
 
             }
 
-            private void label18_Click(object sender, EventArgs e)
-            {
-
-            }
-
+    
+        /// <summary>
+        /// turning off and on graph proeprties.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
             private void checkBox1_CheckedChanged(object sender, EventArgs e)
             {
 
                 Analyse();
             }
+        
             /// <summary>
             /// changing the metrics to KMP/h
             /// </summary>
@@ -1764,16 +2318,6 @@ namespace WindowsFormsApp6
             {
                 dt.Clear();
                 Analyse();
-            }
-
-            private void tabPage1_Click(object sender, EventArgs e)
-            {
-
-            }
-
-            private void zedGraphControl1_Load_1(object sender, EventArgs e)
-            {
-
             }
 
             private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -1817,9 +2361,12 @@ namespace WindowsFormsApp6
 
             double yaxismin;
             double xaxismin;
-
-            bool zoomin;
-
+        /// <summary>
+        /// gets the y and x axis max
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
             private bool zedGraphControl1_MouseDownEvent(ZedGraphControl sender, MouseEventArgs e)
             {
                 yaxismax = sender.GraphPane.XAxis.Scale.Max;
@@ -1828,21 +2375,28 @@ namespace WindowsFormsApp6
                 yaxismin = sender.GraphPane.YAxis.Scale.Min;
                 yaxismin = sender.GraphPane.XAxis.Scale.Min;
 
-                zoomin = false;
+                zoomin = true;
 
 
                 return false;
             }
-
+        /// <summary>
+        /// this is how the averages are recreated the params old state and new state are used.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="oldState"></param>
+        /// <param name="newState"></param>
             private void zedGraphControl1_ZoomEvent(ZedGraphControl sender, ZoomState oldState, ZoomState newState)
             {
-                int startpoint = (int)sender.GraphPane.XAxis.Scale.Min;
-                int endpoint = (int)sender.GraphPane.XAxis.Scale.Max;
+        
+
+                startpoint = (int)sender.GraphPane.XAxis.Scale.Min;
+                endpoint = (int)sender.GraphPane.XAxis.Scale.Max;
 
                 difference = endpoint - startpoint;
+            
 
-
-                if (HeartRateList2.Count > startpoint && HeartRateList2.Count >= endpoint)
+            if (HeartRateList2.Count > startpoint && HeartRateList2.Count >= endpoint)
                 {
                     zoomin = true;
                     List<int> HRLIST = HeartRateList2.ToList();
@@ -1892,15 +2446,73 @@ namespace WindowsFormsApp6
                 }
 
 
+            if (HeartRateListCompare2.Count > startpoint && HeartRateListCompare2.Count >= endpoint)
+            {
+                zoomin = true;
+                List<int> HRLIST = HeartRateListCompare2.ToList();
+                List<int> updateheartrate;
+                if (startpoint < 0)
+                {
+                    startpoint = System.Math.Abs(startpoint);
+                }
 
-                sumcalcs();
+                updateheartrate = HRLIST.GetRange(startpoint, difference);
+                HeartRateListCompare = updateheartrate.ToList();
+                if (SpeedOn)
+                {
+                    List<int> speedlist = SpeedListCompare2.ToList();
+                    List<int> speedupdate;
+                    speedupdate = speedlist.GetRange(startpoint, difference);
+                    SpeedListCompare = speedupdate.ToList();
+                }
+
+
+                if (AltitudeOn)
+                {
+                    List<int> altlist = altitudeListCompare2.ToList();
+                    List<int> altupdate;
+                    altupdate = altlist.GetRange(startpoint, difference);
+                    altitudeListCompare = altupdate.ToList();
+                }
+
+
+
+                if (CadenceOn)
+                {
+                    List<int> cadencelist = CadenceListCompare2.ToList();
+                    List<int> cadenceupdate;
+                    cadenceupdate = cadencelist.GetRange(startpoint, difference);
+                    CadenceListCompare = cadenceupdate.ToList();
+                }
+
+
+
+                if (PowerOn)
+                {
+                    List<int> powerlist = PowerlistCompare2.ToList();
+                    List<int> powerupdate;
+                    powerupdate = powerlist.GetRange(startpoint, difference);
+                    PowerlistCompare = powerupdate.ToList();
+                }
             }
+         
 
+            sumcalcs();
+            }
+        /// <summary>
+        /// this is used in the chunking.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
             private void numericUpDown3_ValueChanged(object sender, EventArgs e)
             {
 
             }
-
+        /// <summary>
+        /// compare analysis button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
             private void button4_Click(object sender, EventArgs e)
             {
 
@@ -1925,7 +2537,14 @@ namespace WindowsFormsApp6
                 zedGraphControl1.Visible = true;
             }
             }
-
+        /// <summary>
+        ///  this is the point value comparison method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="pane"></param>
+        /// <param name="curve"></param>
+        /// <param name="iPt"></param>
+        /// <returns></returns>
         private string ZedGraphControl1_PointValueEvent(ZedGraphControl sender, GraphPane pane, CurveItem curve, int iPt)
         {
 
@@ -2412,15 +3031,39 @@ namespace WindowsFormsApp6
 
         }
 
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// this populates the compare dgv.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button4_Click_1(object sender, EventArgs e)
         {
             CompareAnalyse();
         }
-
+        /// <summary>
+        /// this runs the chunking for the first file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button5_Click(object sender, EventArgs e)
         {
             chunking();
+     
         }
+        private void button7_Click(object sender, EventArgs e)
+        {
+            chunking2();
+        }
+        /// <summary>
+        /// used in calculating the normalised power
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
             {
@@ -2433,11 +3076,11 @@ namespace WindowsFormsApp6
 
             }
 
-            private void tabPage2_Click(object sender, EventArgs e)
-            {
-
-            }
-
+        /// <summary>
+        /// brings datagridview to the front.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
             private void checkBox6_CheckedChanged(object sender, EventArgs e)
             {
                 if (checkBox6.Checked == true)
@@ -2453,16 +3096,11 @@ namespace WindowsFormsApp6
             }
             }
 
-            private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-            {
-
-            }
-
-            private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-            {
-
-            }
-
+        /// <summary>
+        /// changes interval to the next.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
             private void intervalfwd_Click(object sender, EventArgs e)
             {
                 intcounter++;
@@ -2473,7 +3111,11 @@ namespace WindowsFormsApp6
                 zedGraphControl1.AxisChange();
                 intervalpicker();
             }
-
+        /// <summary>
+        /// changes interval back.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
             private void intervalbck_Click(object sender, EventArgs e)
             {
@@ -2484,7 +3126,11 @@ namespace WindowsFormsApp6
                 }
                 intervalpicker();
             }
-
+        /// <summary>
+        /// chooses the file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
             private void button2_Click(object sender, EventArgs e)
             {
                 //reads text file which variables will be passed through
@@ -2500,7 +3146,11 @@ namespace WindowsFormsApp6
                     MessageBox.Show("Choose a Valid Files Location");
                 }
             }
-
+        /// <summary>
+        /// save the file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
             private void button3_Click(object sender, EventArgs e)
             {
                 try
@@ -2515,10 +3165,14 @@ namespace WindowsFormsApp6
                     MessageBox.Show("An error Ocurred: " + etc.Message);
                 }
             }
-
+        /// <summary>
+        /// tts button also calculates normalised power.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
             private void tssbtn_Click(object sender, EventArgs e)
             {
-
+            getNP();
             }
         }
     }
