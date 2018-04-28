@@ -373,7 +373,7 @@ namespace WindowsFormsApp6
         {
             dataGridView1.DataSource = dt;
             dataGridView3.DataSource = dt2;
-
+            dataGridView3.DataSource = dt2;
 
 
             //booleans for checking smode. turning datagrids off and on
